@@ -3,7 +3,7 @@ from HW1.utils.transformations import *
 import matplotlib.pyplot as plt
 
 
-img_path = '../footage/u=3791962068,4292654682&fm=15&gp=0.jpg'
+img_path = 'footage/u=3791962068,4292654682&fm=15&gp=0.jpg'
 img = cv2.imread(img_path)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
