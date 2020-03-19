@@ -1,9 +1,9 @@
 import cv2
-from utils.transformations import *
+from HW1.utils.transformations import *
 import matplotlib.pyplot as plt
 
 
-img_path = 'footage/u=3791962068,4292654682&fm=15&gp=0.jpg'
+img_path = '../footage/u=3791962068,4292654682&fm=15&gp=0.jpg'
 img = cv2.imread(img_path)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -23,7 +23,7 @@ cv2.imshow('LocalGrayTransform2', new_img)
 new_img = HistogramEqualizationGray(img)
 ori_hist, after_hist = GetHist(img), GetHist(new_img)
 # new_img = HistogramEqualizationColor(img)
-cv2.imshow('Historgram equlization', new_img)
+cv2.imshow('Histogram equalization', new_img)
 plt.figure('Origin histogram')
 plt.bar(np.arange(256), ori_hist)
 plt.figure('New histogram')
@@ -33,11 +33,19 @@ plt.bar(np.arange(256), after_hist)
 # 中值滤波
 new_img = cv2.medianBlur(img, 3)
 cv2.imshow('Median blur', new_img)
+
+"""
+自定义均值滤波
+"""
 # 均值滤波
 new_img = cv2.blur(img, (3, 3))
 cv2.imshow('Mean blur', new_img)
-#
-
+kernel = 1/9 * np.array([[1, 1, 1],
+                         [1, 1, 1],
+                         [1, 1, 1]])
+new_img = cv2.filter2D(img, -1, kernel)
+new_img = cv2.medianBlur(img, 3)
+cv2.imshow('Median blur', new_img)
 
 plt.show()
 cv2.waitKeyEx()
